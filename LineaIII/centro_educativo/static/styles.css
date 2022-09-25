@@ -1,0 +1,53 @@
+input {
+    width: 100%;
+    border: 1px solid rgb(190, 187, 187);
+    border-radius: 5px;
+    height: 30px;
+}
+    input:focus {
+    border-color: #7A9D96;
+    color: #2C3238;
+}
+
+.top-user{
+    margin-top: 2px;
+}
+
+.button-logout{
+    padding-bottom: 5px;
+}
+
+.top-icon{
+    padding-top: 3px;
+}
+
+.title{
+    margin-top: 8px;
+}
+
+.bg-white{
+    background-color: white;
+}
+
+.btn-center{
+    margin: 2%, 25%;
+}
+
+.pab-bot{
+    padding-bottom: 5px;
+}
+
+.users{
+    padding-left: 12px;
+}
+
+.user{
+    color: white;
+    font-weight: bold;
+    height: 100%;
+    width: 100px;
+    padding-left: 1%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom: #fff 1px solid;
+}
