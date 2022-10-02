@@ -19,30 +19,23 @@
                     <table class="table">
                         <thead class="table-dark">
                             <tr>
+                                <td>Identificación</td>
                                 <td>Nombres</td>
                                 <td>Apellidos</td>
-                                <td>identificación</td>
-                                <td>Marca de portatil</td>
-                                <td>fecha de Registro</td>
                             </tr>
                         </thead>
-                        {% if list_users %}
+                        {% if students_list %}
                         <tbody>
-                            {% for user in list_users %}
+                            {% for student in students_list %}
                                 <tr>
-                                    <td>{{user.user.first_name}}</td>
-                                    <td>{{user.user.last_name}}</td>
-                                    <td>{{user.user.username}}</td>
-                                    <td>{{user.brand_id}}</td>
-                                    <td>{{user.created_at}}</td>
+                                    <td>{{student.code}}</td>
+                                    <td>{{student.name}}</td>
+                                    <td>{{student.lastName}}</td>
                                 </tr>
                             {% endfor %}
                         </tbody>
                         {% endif %}
                     </table>
-                </div>
-                <div class="row top-user">
-                    <div class="col users"><p class="user bg-dark">Cursos</p></div>
                 </div>
             </div>
         </div>  
