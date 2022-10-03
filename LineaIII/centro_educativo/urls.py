@@ -11,6 +11,4 @@ urlpatterns = [
     path("home", views.home, name="home"),
     path("logout", LogoutView.as_view(template_name='centro_educativo/login.html'), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-"""
-    path("register", views.register, name="register"),
-    path("modelbd", views.modelbd, name="modelbd"),"""
+"""path("register", views.register, name="register"),"""
