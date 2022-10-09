@@ -27,6 +27,6 @@ class Users(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.username, self.rol_id
+        return self.rol_id
 
 #modal with django

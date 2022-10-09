@@ -9,6 +9,7 @@ app_name = "centro_educativo"
 urlpatterns = [
     path("", LoginView.as_view(template_name='centro_educativo/login.html'), name="login"),
     path("home", views.home, name="home"),
+    path("studentForm", views.studentForm, name="studentForm"),
     path("logout", LogoutView.as_view(template_name='centro_educativo/login.html'), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 """path("register", views.register, name="register"),"""

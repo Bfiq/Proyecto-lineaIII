@@ -14,29 +14,87 @@
                 <div class="row top-user">
                     <div class="col users"><p class="user bg-dark">Alumno</p></div>
                     <div class="col">
+                        <div class="container-fluid">
+                            <form class="d-flex" role="search">
+                                <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" name="buscar">
+                                <button class="btn btn-outline-success" type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg></button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col">                  
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             {% if user_rol.id == 1%}
-                                <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#Course">
                                     Crear Curso
                                 </button>  
-                                <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#student">
                                     Crear Alumno
                                 </button>                
-                                <!-- Modal -->
-                                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <!-- Modal Course -->
+                                <div class="modal fade" id="Course" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Registro de</h5>
+                                        <h5 class="modal-title" id="staticBackdropLabel">Registro de Curso</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                                {% comment %} formulario {% endcomment %}
+                                        {% comment %} formulario {% endcomment %}
+                                        <form method="POST">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                  <label for="exampleInputEmail1" class="form-label">Codigo del Curso</label>
+                                                  <input type="text" class="form-control" name="courseCode" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                  <label for="exampleInputPassword1" class="form-label">Nombre del curso</label>
+                                                  <input type="text" class="form-control" name="courseName" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputPassword1" class="form-label">Creditos de curso</label>
+                                                    <input type="number" class="form-control" name="courseCredits" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    </div>
+                                </div>
+                                <!-- Modal Student -->
+                                <div class="modal fade" id="student" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Registro de Alumno</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="button" class="btn btn-primary">Enviar</button>
-                                        </div>
+                                        {% comment %} formulario {% endcomment %}
+                                        <form method="POST" action="/studentForm">
+                                            {% csrf_token %}
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                  <label for="exampleInputEmail1" class="form-label">Codigo del Alumno</label>
+                                                  <input type="text" class="form-control" name="studentCode" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                  <label for="exampleInputPassword1" class="form-label">Nombre del Alumno</label>
+                                                  <input type="text" class="form-control" name="studentName" required>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="exampleInputPassword1" class="form-label">Apellido del Alumno </label>
+                                                    <input type="text" class="form-control" name="studentLastName" required>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                                <button type="submit" class="btn btn-primary">Enviar</button>
+                                            </div>
+                                        </form>
                                     </div>
                                     </div>
                                 </div>
@@ -53,6 +111,9 @@
                                 <td>Identificación</td>
                                 <td>Nombres</td>
                                 <td>Apellidos</td>
+                                {% if user_rol.id == 1%}
+                                    <td>Opciones</td>
+                                {% endif %}
                             </tr>
                         </thead>
                         {% if students_list %}
@@ -62,6 +123,37 @@
                                     <td>{{student.code}}</td>
                                     <td>{{student.name}}</td>
                                     <td>{{student.lastName}}</td>
+                                    {% if user_rol.id == 1%}
+                                        <td>
+                                            <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#studentInfo">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                                </svg>
+                                            </button>
+                                        </td>
+                                        <!-- Modal Student Information -->
+                                        <div class="modal fade" id="studentInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                <h5 class="modal-title" id="staticBackdropLabel">Datos del Alumno</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="mb-3">
+                                                    <label for="exampleInputEmail1" class="form-label">Codigo del Alumno</label>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                    <label for="exampleInputPassword1" class="form-label">Nombre del Alumno</label>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Apellido del Alumno </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
                                 </tr>
                             {% endfor %}
                         </tbody>
