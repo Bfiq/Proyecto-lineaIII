@@ -1,19 +1,23 @@
+from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
-
-class Students(models.Model):
-    code = models.CharField(max_length=25)
-    name = models.CharField(max_length=25)
-    lastName = models.CharField(max_length=25)
 
 class Courses(models.Model):
     code = models.CharField(max_length=25)
     name = models.CharField(max_length=30)
     credits = models.BigIntegerField()
-    students = models.ManyToManyField(Students)
 
     def __str__(self):
         return self.name
+
+class Students(models.Model):
+    code = models.CharField(max_length=25)
+    name = models.CharField(max_length=25)
+    lastName = models.CharField(max_length=25)
+    courses = models.ManyToManyField(Courses, through='StudentsCourses')
+
+    def __str__(self):
+        return str(self.id)
 
 class Roles(models.Model):
     name = models.CharField(max_length=20)
@@ -28,5 +32,9 @@ class Users(models.Model):
 
     def __str__(self):
         return self.rol_id
+
+class StudentsCourses(models.Model):
+    student_id = models.ForeignKey(Students, on_delete=models.CASCADE) 
+    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
 
 #modal with django

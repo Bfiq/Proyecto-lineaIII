@@ -12,7 +12,7 @@
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-9 bg-light border border-primary rounded">
                 <div class="row top-user">
-                    <div class="col users"><p class="user bg-dark">Alumno</p></div>
+                    <div class="col users"><p class="user bg-dark">Cursos</p></div>
                     <div class="col">
                         <div class="container-fluid">
                             <form class="d-flex" role="search">
@@ -25,10 +25,10 @@
                     </div>
                     <div class="col">                  
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                            {% if user_rol.id == 1%} 
-                                <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#student">
-                                    Crear Alumno
-                                </button>                
+                            {% if user_rol.id == 1%}
+                                <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#Course">
+                                    Crear Curso
+                                </button>                 
                                 <!-- Modal Course -->
                                 <div class="modal fade" id="Course" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -105,32 +105,33 @@
                     <table class="table">
                         <thead class="table-dark">
                             <tr>
-                                <td>Identificación</td>
-                                <td>Nombres</td>
-                                <td>Apellidos</td>
+                                <td>Codigo</td>
+                                <td>Nombre</td>
+                                <td>Creditos</td>
                                 {% if user_rol.id == 1%}
                                     <td>Opciones</td>
                                 {% endif %}
                             </tr>
                         </thead>
-                        {% if students_list %}
+                        {% if courses_list %}
                         <tbody>
-                            {% for student in students_list %}
+                            {% for course in courses_list %}
                                 <tr>
-                                    <td id="studentCode">{{student.code}}</td>
-                                    <td>{{student.name}}</td>
-                                    <td>{{student.lastName}}</td>
+                                    <td id="courseCode">{{course.code}}</td>
+                                    <td>{{course.name}}</td>
+                                    <td>{{course.credits}}</td>
                                     {% if user_rol.id == 1%}
                                         <td>
                                             <button type="button" class="btn btn-success float-end btn-block buttons_home">
-                                                <a href="{% url 'centro_educativo:editStudent' student.id %}">
+                                                <a href="{% url 'centro_educativo:editCourse' course.id %}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                                         <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
                                                     </svg>
                                                 </a>
                                             </button>
-                                            <button type="button" class="btn btn-danger float-end btn-block buttons_home edit" data-bs-toggle="modal" data-bs-target="#studentInfo">
-                                                <a href="{% url 'centro_educativo:deleteStudent' student.id %}">
+                                            {% comment %} borrar curso {% endcomment %}
+                                            <button type="button" class="btn btn-danger float-end btn-block buttons_home edit">
+                                                <a href="{% url 'centro_educativo:deleteCourse' course.id %}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                                         <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
