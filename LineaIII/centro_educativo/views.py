@@ -1,10 +1,11 @@
 from unicodedata import name
 from django.shortcuts import get_object_or_404, redirect, render
-from .models import Students, Users, Courses
+from .models import Students, Users, Courses#, StudentsCourses
 from django.db.models import Q
 
 def home(request):
     students_list = Students.objects.all()
+    courses_list = Courses.objects.all()
 
     queryset = request.GET.get("buscar") #si existe?
 
@@ -32,7 +33,7 @@ def home(request):
     if(request.user.id):
         userid = request.user.id
         user_rol = Users.objects.get(pk=userid) 
-        return render(request, "centro_educativo/home.html", {"students_list": students_list, "user_rol":user_rol})
+        return render(request, "centro_educativo/home.html", {"students_list": students_list,"courses_list":courses_list, "user_rol":user_rol})
     else:
         return render(request, "centro_educativo/home.html")
 
@@ -69,6 +70,7 @@ def courses(request):
     else:
         return render(request, "centro_educativo/courses.html")
 
+#eliminar?
 def studentForm(request):
     if(request.method == "POST"):
         if request.POST["studentCode"]:
@@ -84,14 +86,42 @@ def studentForm(request):
     student = Students.objects.filter(id=student_id).first() """
 
 def editStudent(request,student_id):
+    courses_list = Courses.objects.all()
     student = Students.objects.filter(id=student_id).first()
     data = {
         'title' : 'Edición del alumno',
-        'student' :  student
+        'student' :  student,
+        "courses_list": courses_list
     }
 
     return render(request, "centro_educativo/editStudent.html", data)
 
+def editRecordStudent(request):
+    if(request.method == "POST"):
+        if request.POST["studentCode"]:
+            id = request.POST["id"]
+            code = request.POST["studentCode"]
+            name = request.POST["studentName"]
+            lastName = request.POST["studentLastName"]
+            student = Students.objects.get(id=id)
+            student.name = name
+            student.code = code
+            student.lastName = lastName
+            student.save()
+
+    return redirect('/home')
+
+
+def addCourseinUser(request, student_id, course_id):
+    if student_id:
+        #print(f"testeo:{student_id}/{course_id}")#agregar esto a la tabla intermedia
+        student = Students.objects.filter(id=student_id).first()
+        course = Courses.objects.filter(id=course_id).first()
+        """ newStudentsCourses = StudentsCourses(student_id,course_id)
+        newStudentsCourses.save() """
+        return redirect(f'/editStudent/{student_id}')
+    else:
+        return redirect('/home')
 
 def editCourse(request,course_id):
     course = Courses.objects.filter(id=course_id).first()
@@ -116,7 +146,6 @@ def editRecordCourse(request):
             course.save()
 
             return redirect('/courses')
-
 
 def deleteStudent(request, pk):
     if(pk != ""):

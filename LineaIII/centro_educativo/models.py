@@ -1,4 +1,3 @@
-from tkinter import CASCADE
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -34,7 +33,10 @@ class Users(models.Model):
         return self.rol_id
 
 class StudentsCourses(models.Model):
-    student_id = models.ForeignKey(Students, on_delete=models.CASCADE) 
-    course_id = models.ForeignKey(Courses, on_delete=models.CASCADE)
+    student = models.ForeignKey(Students, on_delete=models.CASCADE) 
+    course = models.ForeignKey(Courses, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.id)
 
 #modal with django

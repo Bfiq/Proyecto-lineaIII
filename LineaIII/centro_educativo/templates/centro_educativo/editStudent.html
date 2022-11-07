@@ -13,7 +13,7 @@
         <div class="col-9 bg-light border border-primary rounded">
             <div class="row top-user">
                 {% if student %}
-                <form method="POST" action="/editRecordCourse">
+                <form method="POST" action="/editRecordStudent">
                     {% csrf_token %}
                     <input type="hidden" value="{{student.id}}" name="id">
                     <div class="modal-body">
@@ -27,8 +27,37 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Apellidos del Alumno</label>
-                            <input type="number" class="form-control" value="{{student.lastName}}" name="studentLastName" required>
+                            <input type="text" class="form-control" value="{{student.lastName}}" name="studentLastName" required>
                         </div>
+                        {% if courses_list %}
+                            <table class="table">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <td>Codigo</td>
+                                        <td>Nombre</td>
+                                        <td>Creditos</td>
+                                        <td>Opción</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for course in courses_list %}
+                                        <tr>
+                                            <td id="courseCode">{{course.code}}</td>
+                                            <td>{{course.name}}</td>
+                                            <td>{{course.credits}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-primary">
+                                                    <a href="{% url 'centro_educativo:addCourseinUser' student.id course.id %}">
+                                                        Agregar
+                                                    </a>
+                                                </button>
+                                      
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        {% endif %}
                     </div>  
                     <div class="modal-footer">
                         <a class="btn btn-danger" href="{% url 'centro_educativo:home' %}">Volver</a>

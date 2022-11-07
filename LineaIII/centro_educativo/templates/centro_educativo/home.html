@@ -29,39 +29,6 @@
                                 <button type="button" class="btn btn-success float-end btn-block buttons_home" data-bs-toggle="modal" data-bs-target="#student">
                                     Crear Alumno
                                 </button>                
-                                <!-- Modal Course -->
-                                <div class="modal fade" id="Course" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                        <h5 class="modal-title" id="staticBackdropLabel">Registro de Curso</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        {% comment %} formulario {% endcomment %}
-                                        <form method="POST">
-                                            {% csrf_token %}
-                                            <div class="modal-body">
-                                                <div class="mb-3">
-                                                  <label for="exampleInputEmail1" class="form-label">Codigo del Curso</label>
-                                                  <input type="text" class="form-control" name="courseCode" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                  <label for="exampleInputPassword1" class="form-label">Nombre del curso</label>
-                                                  <input type="text" class="form-control" name="courseName" required>
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="exampleInputPassword1" class="form-label">Creditos de curso</label>
-                                                    <input type="number" class="form-control" name="courseCredits" required>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary">Enviar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    </div>
-                                </div>
                                 <!-- Modal Student -->
                                 <div class="modal fade" id="student" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                     <div class="modal-dialog">
@@ -86,6 +53,7 @@
                                                     <label for="exampleInputPassword1" class="form-label">Apellido del Alumno </label>
                                                     <input type="text" class="form-control" name="studentLastName" required>
                                                 </div>
+                                                
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -138,29 +106,6 @@
                                                 </a>
                                             </button>  
                                         </td>
-                                        <!-- Modal Student Information -->
-                                        <div class="modal fade" id="studentInfo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title" id="staticBackdropLabel">Datos del Alumno</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div class="mb-3">
-                                                    <label for="exampleInputEmail1" class="form-label">Codigo del Alumno</label>
-                                                    <input type="text" id="studentCode"/>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                    <label for="exampleInputPassword1" class="form-label">Nombre del Alumno</label>
-                                                    </div>
-                                                    <div class="mb-3">
-                                                        <label for="exampleInputPassword1" class="form-label">Apellido del Alumno </label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            </div>
-                                        </div>
                                     {% endif %}
                                 </tr>
                             {% endfor %}
