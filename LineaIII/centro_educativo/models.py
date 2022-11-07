@@ -16,7 +16,7 @@ class Students(models.Model):
     courses = models.ManyToManyField(Courses, through='StudentsCourses')
 
     def __str__(self):
-        return str(self.id)
+        return self.name
 
 class Roles(models.Model):
     name = models.CharField(max_length=20)
@@ -30,7 +30,7 @@ class Users(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.rol_id
+        return self.user.username
 
 class StudentsCourses(models.Model):
     student = models.ForeignKey(Students, on_delete=models.CASCADE) 

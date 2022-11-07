@@ -29,6 +29,14 @@
                             <label for="exampleInputPassword1" class="form-label">Apellidos del Alumno</label>
                             <input type="text" class="form-control" value="{{student.lastName}}" name="studentLastName" required>
                         </div>
+                        {% if student_courses %}
+                            <div class="mb-3">
+                                <label for="exampleInputPassword1" class="form-label">Cursos del Alumno</label>
+                                {% for course in student_courses %}
+                                    <p>{{course.course.name}}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
                         {% if courses_list %}
                             <table class="table">
                                 <thead class="table-dark">

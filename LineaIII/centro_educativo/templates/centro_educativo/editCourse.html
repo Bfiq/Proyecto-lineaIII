@@ -35,6 +35,14 @@
                         <button type="submit" class="btn btn-primary">Enviar</button>
                     </div>
                 </form>
+                <div class="mb-3">
+                    <b><label for="exampleInputPassword1" class="form-label">Reporte de alumnos en el curso</label></b>
+                    {% if course_students %}
+                        {% for student in course_students %}
+                            <p>{{student.student.name}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
                 {% endif %}
             </div>
         </div>
