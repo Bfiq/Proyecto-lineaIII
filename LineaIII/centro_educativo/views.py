@@ -1,4 +1,3 @@
-from unicodedata import name
 from django.shortcuts import get_object_or_404, redirect, render
 from .models import Students, Users, Courses, StudentsCourses
 from django.db.models import Q
@@ -81,9 +80,6 @@ def studentForm(request):
             newStudent.save()
 
     return redirect('/home')
-
-""" def editStudent(request,student_id):
-    student = Students.objects.filter(id=student_id).first() """
 
 def editStudent(request,student_id):
     courses_list = Courses.objects.all()
