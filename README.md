@@ -1,2 +1,2 @@
 # Proyecto-lineaIII
-Proyecto web simple para el aprendizaje de vulnerabilidades(ataques) y seguridad web
+Proyecto web simple de aprendizaje -> Clase Linea III
